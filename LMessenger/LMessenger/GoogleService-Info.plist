@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>860902743942-niorrjdc0ihq0c7vtjean5uns08bcr3l.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.860902743942-niorrjdc0ihq0c7vtjean5uns08bcr3l</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBgX1R7di-8OcatLJNPB_cT2pMo8dzYgnQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>860902743942</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>ysome.LMessenger</string>
+	<key>PROJECT_ID</key>
+	<string>lmessenger-ffacb</string>
+	<key>STORAGE_BUCKET</key>
+	<string>lmessenger-ffacb.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:860902743942:ios:1c395fd7a425619844d607</string>
+</dict>
+</plist>

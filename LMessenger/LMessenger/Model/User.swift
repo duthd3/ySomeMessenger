@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User {
+struct User: Encodable {
     var id: String
     var name: String
     var phoneNumber: String?
@@ -21,5 +21,15 @@ extension User {
     }
     static var stub2: User {
         .init(id: "user2_id", name: "윤여송")
+    }
+}
+
+extension User {
+    func toObject() -> UserObject {
+        .init(id: id, 
+              name: name,
+              phoneNumber: phoneNumber,
+              profileURL: profileURL,
+              description: description)
     }
 }

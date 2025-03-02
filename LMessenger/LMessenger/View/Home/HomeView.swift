@@ -12,54 +12,87 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                profileView
-                    .padding(.bottom, 30)
-                searchButtonView
-                    .padding(.bottom, 24)
-                HStack {
-                    Text("친구")
-                        .font(.system(size: 14))
-                        .foregroundStyle(Color.bkText)
-                    Spacer()
-                }
-                .padding(.horizontal, 30)
-                
-                // TODO: - 친구 목록
-                // 친구가 없을 때
-                if viewModel.users.isEmpty {
-                    emptyView
-                } else {
-                    // 친구가 있을 때
-                    ForEach(viewModel.users, id: \.id) { user in
-                        HStack(spacing: 8) {
-                            Image("person")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                                .clipShape(Circle())
-                            Text("\(user.name)")
-                                .font(.system(size: 12))
-                                .foregroundStyle(Color.bkText)
-                            Spacer()
-                        }
-                        .padding(.horizontal, 30)
+           contentView
+                .fullScreenCover(item: $viewModel.modalDestination) {
+                    switch $0 {
+                    case .myProfile:
+                        MyProfileView()
+                    case let .otherProfile(userId):
+                        OtherProfileView()
                     }
                 }
+        }
+    }
     
-            }
-            .toolbar {
-                Image("bookmark")
-                Image("notifications")
-                Image("person_add")
-                Button {
-                    // TODO: settings
-                    
-                } label: {
-                    Image("settings")
+    @ViewBuilder
+    var contentView: some View {
+        switch viewModel.phase {
+        case .notRequested:
+            PlaceholderView()
+                .onAppear {
+                    viewModel.send(action: .load)
+
                 }
+        case .loading:
+            LoadingView()
+        case .success:
+            loadedView
+                .toolbar {
+                    Image("bookmark")
+                    Image("notifications")
+                    Image("person_add")
+                    Button {
+                        // TODO: settings
+                        
+                    } label: {
+                        Image("settings")
+                    }
+                }
+        case .fail:
+            ErrorView()
+        }
+    }
+    
+    var loadedView: some View {
+        ScrollView {
+            profileView
+                .padding(.bottom, 30)
+            searchButtonView
+                .padding(.bottom, 24)
+            HStack {
+                Text("친구")
+                    .font(.system(size: 14))
+                    .foregroundStyle(Color.bkText)
+                Spacer()
             }
-            .onAppear {
-                viewModel.send(action: .getUser)
+            .padding(.horizontal, 30)
+            
+            // TODO: - 친구 목록
+            // 친구가 없을 때
+            if viewModel.users.isEmpty {
+                emptyView
+            } else {
+                LazyVStack {
+                    // 친구가 있을 때(무한히 늘어 나야 함)
+                    ForEach(viewModel.users, id: \.id) { user in
+                        Button(action: {
+                            viewModel.send(action: .presentOtherProfileView(user.id))
+                        }, label: {
+                            HStack(spacing: 8) {
+                                Image("person")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
+                                Text("\(user.name)")
+                                    .font(.system(size: 12))
+                                    .foregroundStyle(Color.bkText)
+                                Spacer()
+                            }
+                            .padding(.horizontal, 30)
+                        })
+                    }
+
+                }
             }
         }
     }
@@ -83,6 +116,9 @@ struct HomeView: View {
                 .clipShape(Circle())
         }
         .padding(.horizontal, 30)
+        .onTapGesture {
+            viewModel.send(action: .presentMyProfileView)
+        }
     }
     
     var searchButtonView: some View {
@@ -115,7 +151,7 @@ struct HomeView: View {
             .padding(.bottom, 30)
             
             Button {
-                
+                viewModel.send(action: .requestContacts)
             } label: {
                 Text("친구 추가")
                     .font(.system(size: 14))

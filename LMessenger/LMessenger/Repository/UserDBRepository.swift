@@ -12,6 +12,8 @@ import FirebaseDatabase
 protocol UserDBRepositoryType {
     func addUser(_ object: UserObject) -> AnyPublisher<Void, DBError> // 사용자 정보 DB에 저장
     func getUser(userId: String) -> AnyPublisher<UserObject, DBError> // DB에서 사용자 정보 가져오기
+    func loadUsers() -> AnyPublisher<[UserObject], DBError> // 유저 정보 DB에서 가져오기
+    func addUserAfterContact(users: [UserObject]) -> AnyPublisher<Void, DBError>
 }
 
 class UserDBRepository: UserDBRepositoryType {
@@ -65,5 +67,71 @@ class UserDBRepository: UserDBRepositoryType {
             }
         }
         .eraseToAnyPublisher()
+    }
+    
+    func loadUsers() -> AnyPublisher<[UserObject], DBError> {
+        Future<Any?, DBError> { [weak self] promise in
+            self?.db.child(DBKey.Users).getData { error, snapshot in
+                if let error {
+                    promise(.failure(DBError.error(error)))
+                } else if snapshot?.value is NSNull {
+                    promise(.success(nil))
+                } else {
+                    promise(.success(snapshot?.value)) // dict 형태
+                }
+            }
+        }.flatMap { value in
+            if let dic = value as? [String: [String: Any]] { // 형태가 맞다면
+                return Just(dic)
+                    .tryMap { try JSONSerialization.data(withJSONObject: $0) }
+                    .decode(type: [String: UserObject].self, decoder: JSONDecoder())
+                    .map { $0.values.map { $0 as UserObject } }
+                    .mapError { DBError.error($0) }
+                    .eraseToAnyPublisher()
+            } else if value == nil {
+                return Just([]).setFailureType(to: DBError.self).eraseToAnyPublisher()
+            } else { // 실패할 경우
+                return Fail(error: .invalidatedType).eraseToAnyPublisher()
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func addUserAfterContact(users: [UserObject]) -> AnyPublisher<Void, DBError> {
+        /*
+         Users/
+            user_id: [String: Any]
+            user_id: [String: Any]
+            ...
+         */
+        Publishers.Zip(users.publisher, users.publisher)
+            .compactMap { origin, converted in
+                if let converted = try? JSONEncoder().encode(converted) {
+                    return (origin, converted)
+                } else {
+                    return nil
+                }
+            }
+            .compactMap { origin, converted in
+                if let converted = try? JSONSerialization.jsonObject(with: converted, options: .fragmentsAllowed) {
+                    return (origin, converted)
+                } else {
+                    return nil
+                }
+            }
+            .flatMap { origin, converted in
+                Future<Void, Error> { [weak self] promise in
+                    self?.db.child(DBKey.Users).child(origin.id).setValue(converted) { error, _ in
+                        if let error {
+                            promise(.failure(error))
+                        } else {
+                            promise(.success(()))
+                        }
+                    }
+                }
+            }
+            .last()
+            .mapError { .error($0) }
+            .eraseToAnyPublisher()
     }
 }

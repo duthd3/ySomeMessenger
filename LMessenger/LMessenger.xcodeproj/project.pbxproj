@@ -22,6 +22,14 @@
 		BF1F0E8C2D2574DF000C8028 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = BF1F0E8B2D2574DF000C8028 /* GoogleSignIn */; };
 		BF1F0E8F2D2575EC000C8028 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F0E8E2D2575EC000C8028 /* User.swift */; };
 		BF1F0E912D257624000C8028 /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F0E902D257624000C8028 /* ServiceError.swift */; };
+		BF43D4852D7463AB00A88000 /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF43D4842D7463AB00A88000 /* Phase.swift */; };
+		BF43D4882D7464A700A88000 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF43D4872D7464A700A88000 /* PlaceholderView.swift */; };
+		BF43D48A2D7464DF00A88000 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF43D4892D7464DF00A88000 /* LoadingView.swift */; };
+		BF43D48C2D74654100A88000 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF43D48B2D74654100A88000 /* ErrorView.swift */; };
+		BF43D48E2D74673F00A88000 /* HomeModalDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF43D48D2D74673F00A88000 /* HomeModalDestination.swift */; };
+		BF43D4922D74686C00A88000 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF43D4912D74686C00A88000 /* MyProfileView.swift */; };
+		BF43D4942D74687700A88000 /* OtherProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF43D4932D74687700A88000 /* OtherProfileView.swift */; };
+		BF43D4962D746F4900A88000 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF43D4952D746F4900A88000 /* ContactService.swift */; };
 		BF865B412D4E6B120050F72B /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF865B3F2D4E6B120050F72B /* SHA256.swift */; };
 		BF865B422D4E6B120050F72B /* RandomNonceString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF865B402D4E6B120050F72B /* RandomNonceString.swift */; };
 		BF8F26642D58CCB000C35AEF /* MainTabViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8F26632D58CCB000C35AEF /* MainTabViewType.swift */; };
@@ -56,6 +64,14 @@
 		BF1F0E882D2539E6000C8028 /* LoginButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonStyle.swift; sourceTree = "<group>"; };
 		BF1F0E8E2D2575EC000C8028 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BF1F0E902D257624000C8028 /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
+		BF43D4842D7463AB00A88000 /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
+		BF43D4872D7464A700A88000 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		BF43D4892D7464DF00A88000 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		BF43D48B2D74654100A88000 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		BF43D48D2D74673F00A88000 /* HomeModalDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModalDestination.swift; sourceTree = "<group>"; };
+		BF43D4912D74686C00A88000 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
+		BF43D4932D74687700A88000 /* OtherProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfileView.swift; sourceTree = "<group>"; };
+		BF43D4952D746F4900A88000 /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		BF865B3D2D4E67D60050F72B /* LMessenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LMessenger.entitlements; sourceTree = "<group>"; };
 		BF865B3F2D4E6B120050F72B /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
 		BF865B402D4E6B120050F72B /* RandomNonceString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNonceString.swift; sourceTree = "<group>"; };
@@ -95,8 +111,10 @@
 		BF1F0E6B2D2527D2000C8028 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				BF43D4862D74649B00A88000 /* View */,
 				BF1F0E6C2D2527DB000C8028 /* DIContainer.swift */,
 				BF9759CA2D62142D00C2AD9F /* Constants.swift */,
+				BF43D4842D7463AB00A88000 /* Phase.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -108,6 +126,7 @@
 				BF1F0E7E2D2532F3000C8028 /* AuthenticationService.swift */,
 				BF1F0E902D257624000C8028 /* ServiceError.swift */,
 				BFCB7F122D620CCF00D021E0 /* UserService.swift */,
+				BF43D4952D746F4900A88000 /* ContactService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -115,6 +134,7 @@
 		BF1F0E712D252951000C8028 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BF43D4902D74685E00A88000 /* Profile */,
 				BF8F266A2D58D1BB00C35AEF /* ChatList */,
 				BF8F26692D58D1AF00C35AEF /* Home */,
 				BF1F0E722D252956000C8028 /* Authentication */,
@@ -160,6 +180,25 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		BF43D4862D74649B00A88000 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BF43D4872D7464A700A88000 /* PlaceholderView.swift */,
+				BF43D4892D7464DF00A88000 /* LoadingView.swift */,
+				BF43D48B2D74654100A88000 /* ErrorView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BF43D4902D74685E00A88000 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				BF43D4912D74686C00A88000 /* MyProfileView.swift */,
+				BF43D4932D74687700A88000 /* OtherProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		BF865B3E2D4E6ABD0050F72B /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +213,7 @@
 			children = (
 				BF8F26652D58D19000C35AEF /* HomeView.swift */,
 				BF8F266B2D58D3F200C35AEF /* HomeViewModel.swift */,
+				BF43D48D2D74673F00A88000 /* HomeModalDestination.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -362,8 +402,14 @@
 				BF1F0E8F2D2575EC000C8028 /* User.swift in Sources */,
 				BF1F0E832D2534E5000C8028 /* LoginIntroView.swift in Sources */,
 				BF1F0E742D252965000C8028 /* AuthenticationViewModel.swift in Sources */,
+				BF43D48C2D74654100A88000 /* ErrorView.swift in Sources */,
+				BF43D48A2D7464DF00A88000 /* LoadingView.swift in Sources */,
+				BF43D4852D7463AB00A88000 /* Phase.swift in Sources */,
+				BF43D4962D746F4900A88000 /* ContactService.swift in Sources */,
 				BFCB7F162D620E1100D021E0 /* UserObject.swift in Sources */,
 				BF8F266C2D58D3F200C35AEF /* HomeViewModel.swift in Sources */,
+				BF43D4882D7464A700A88000 /* PlaceholderView.swift in Sources */,
+				BF43D48E2D74673F00A88000 /* HomeModalDestination.swift in Sources */,
 				BF1F0E702D252835000C8028 /* Services.swift in Sources */,
 				BF1F0E6D2D2527DB000C8028 /* DIContainer.swift in Sources */,
 				BFCB7F132D620CCF00D021E0 /* UserService.swift in Sources */,
@@ -381,7 +427,9 @@
 				BF1F0E872D253824000C8028 /* LoginView.swift in Sources */,
 				BF865B422D4E6B120050F72B /* RandomNonceString.swift in Sources */,
 				BF1F0E7F2D2532F3000C8028 /* AuthenticationService.swift in Sources */,
+				BF43D4922D74686C00A88000 /* MyProfileView.swift in Sources */,
 				BF1F0E852D2534FA000C8028 /* MainTabView.swift in Sources */,
+				BF43D4942D74687700A88000 /* OtherProfileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +568,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LMessenger/Info.plist;
+				INFOPLIST_KEY_NSContactsUsageDescription = "친구 목록을 가져옵니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -551,6 +600,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LMessenger/Info.plist;
+				INFOPLIST_KEY_NSContactsUsageDescription = "친구 목록을 가져옵니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

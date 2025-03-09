@@ -22,7 +22,7 @@ class HomeViewModel: ObservableObject {
     @Published var phase: Phase = .notRequested
     @Published var modalDestination: HomeModalDestination?
     
-    private var userId: String
+    var userId: String
     
     private var container: DIContainer
     

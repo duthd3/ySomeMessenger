@@ -12,6 +12,8 @@ import FirebaseDatabase
 protocol UserDBRepositoryType {
     func addUser(_ object: UserObject) -> AnyPublisher<Void, DBError> // 사용자 정보 DB에 저장
     func getUser(userId: String) -> AnyPublisher<UserObject, DBError> // DB에서 사용자 정보 가져오기
+    func getUser(userId: String) async throws -> UserObject // async로 비동기로 작업하기
+    func updateUser(userId: String, key: String, value: Any) async throws // 유저 정보 업데이트
     func loadUsers() -> AnyPublisher<[UserObject], DBError> // 유저 정보 DB에서 가져오기
     func addUserAfterContact(users: [UserObject]) -> AnyPublisher<Void, DBError>
 }
@@ -67,6 +69,20 @@ class UserDBRepository: UserDBRepositoryType {
             }
         }
         .eraseToAnyPublisher()
+    }
+    
+    func getUser(userId: String) async throws -> UserObject {
+        guard let value = try await self.db.child(DBKey.Users).child(userId).getData().value else {
+            throw DBError.emptyValue
+        }
+        
+        let data = try JSONSerialization.data(withJSONObject: value)
+        let userObject = try JSONDecoder().decode(UserObject.self, from: data)
+        return userObject
+    }
+    
+    func updateUser(userId: String, key: String, value: Any) async throws {
+        try await self.db.child(DBKey.Users).child(userId).child(key).setValue(value)
     }
     
     func loadUsers() -> AnyPublisher<[UserObject], DBError> {

@@ -39,6 +39,9 @@
 		BF8F266F2D58E2E800C35AEF /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BF8F266E2D58E2E800C35AEF /* FirebaseDatabase */; };
 		BF9759C92D62125200C2AD9F /* DBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9759C82D62125200C2AD9F /* DBError.swift */; };
 		BF9759CB2D62142D00C2AD9F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9759CA2D62142D00C2AD9F /* Constants.swift */; };
+		BFA0A7C72D7D948B001BA524 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0A7C62D7D948B001BA524 /* MyProfileViewModel.swift */; };
+		BFA0A7C92D7D9F5B001BA524 /* MyProfileMenuType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0A7C82D7D9F5B001BA524 /* MyProfileMenuType.swift */; };
+		BFA0A7CB2D7DA5C5001BA524 /* MyProfileDescEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0A7CA2D7DA5C5001BA524 /* MyProfileDescEditView.swift */; };
 		BFCB7F112D620CB300D021E0 /* UserDBRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCB7F102D620CB300D021E0 /* UserDBRepository.swift */; };
 		BFCB7F132D620CCF00D021E0 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCB7F122D620CCF00D021E0 /* UserService.swift */; };
 		BFCB7F162D620E1100D021E0 /* UserObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCB7F152D620E1100D021E0 /* UserObject.swift */; };
@@ -81,6 +84,9 @@
 		BF8F266B2D58D3F200C35AEF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		BF9759C82D62125200C2AD9F /* DBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBError.swift; sourceTree = "<group>"; };
 		BF9759CA2D62142D00C2AD9F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BFA0A7C62D7D948B001BA524 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
+		BFA0A7C82D7D9F5B001BA524 /* MyProfileMenuType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileMenuType.swift; sourceTree = "<group>"; };
+		BFA0A7CA2D7DA5C5001BA524 /* MyProfileDescEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileDescEditView.swift; sourceTree = "<group>"; };
 		BFCB7F102D620CB300D021E0 /* UserDBRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBRepository.swift; sourceTree = "<group>"; };
 		BFCB7F122D620CCF00D021E0 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		BFCB7F152D620E1100D021E0 /* UserObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObject.swift; sourceTree = "<group>"; };
@@ -194,7 +200,10 @@
 			isa = PBXGroup;
 			children = (
 				BF43D4912D74686C00A88000 /* MyProfileView.swift */,
+				BFA0A7C62D7D948B001BA524 /* MyProfileViewModel.swift */,
 				BF43D4932D74687700A88000 /* OtherProfileView.swift */,
+				BFA0A7C82D7D9F5B001BA524 /* MyProfileMenuType.swift */,
+				BFA0A7CA2D7DA5C5001BA524 /* MyProfileDescEditView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -419,6 +428,7 @@
 				BFD62FB32D202E3F00434A0C /* Color+Extension.swift in Sources */,
 				BF8F26682D58D19800C35AEF /* ChatListView.swift in Sources */,
 				BF8F26642D58CCB000C35AEF /* MainTabViewType.swift in Sources */,
+				BFA0A7C72D7D948B001BA524 /* MyProfileViewModel.swift in Sources */,
 				BF8F26662D58D19000C35AEF /* HomeView.swift in Sources */,
 				BF1F0E892D2539E6000C8028 /* LoginButtonStyle.swift in Sources */,
 				BF1F0E912D257624000C8028 /* ServiceError.swift in Sources */,
@@ -429,6 +439,8 @@
 				BF1F0E7F2D2532F3000C8028 /* AuthenticationService.swift in Sources */,
 				BF43D4922D74686C00A88000 /* MyProfileView.swift in Sources */,
 				BF1F0E852D2534FA000C8028 /* MainTabView.swift in Sources */,
+				BFA0A7CB2D7DA5C5001BA524 /* MyProfileDescEditView.swift in Sources */,
+				BFA0A7C92D7D9F5B001BA524 /* MyProfileMenuType.swift in Sources */,
 				BF43D4942D74687700A88000 /* OtherProfileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

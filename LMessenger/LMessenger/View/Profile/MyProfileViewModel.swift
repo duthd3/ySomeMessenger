@@ -6,12 +6,22 @@
 //
 
 import Foundation
+import PhotosUI
+import SwiftUI
 
 @MainActor
 class MyProfileViewModel: ObservableObject {
     
     @Published var userInfo: User?
     @Published var isPresentedDescEditView: Bool = false
+    @Published var imageSelection: PhotosPickerItem? {
+        didSet {
+            print("imageSelection완료!")
+            Task {
+                await updateProfileImage(pickerItem: imageSelection)
+            }
+        }
+    }
     
     private var container: DIContainer
     private let userId: String
@@ -33,6 +43,21 @@ class MyProfileViewModel: ObservableObject {
             userInfo?.description = description
         } catch {
             
+        }
+    }
+    
+    func updateProfileImage(pickerItem: PhotosPickerItem?) async {
+        guard let pickerItem else {
+            return
+        }
+        do {
+            let data = try await container.services.photoPickerService.loadTransferable(from: pickerItem) //이미지 data화
+            let url = try await container.services.uploadService.uploadImage(source: .profile(userId: userId), data: data) // 이미지 업로드
+            try await container.services.userService.updateProfileURL(userId: userId, urlString: url.absoluteString) // db업데이트
+            
+            userInfo?.profileURL = url.absoluteString
+        } catch {
+            print(error.localizedDescription)
         }
     }
     

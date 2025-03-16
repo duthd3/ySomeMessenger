@@ -47,7 +47,6 @@ class HomeViewModel: ObservableObject {
                     self.container.services.userService.loadUsers(id: user.id)
                 }
                 .sink { [weak self] completion in
-                    // TODO:
                     print(completion)
                     print("failure")
                     if case .failure = completion {

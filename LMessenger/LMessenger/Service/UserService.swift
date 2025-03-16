@@ -13,6 +13,7 @@ protocol UserServiceType {
     func getUser(userId: String) -> AnyPublisher<User, ServiceError>
     func getUser(userId: String) async throws -> User
     func updateDescription(userId: String, description: String) async throws
+    func updateProfileURL(userId: String, urlString: String) async throws
     func loadUsers(id: String) -> AnyPublisher<[User], ServiceError> // 유저 정보 가져오기 (친구)
     func addUserAfterContact(users: [User]) -> AnyPublisher<Void, ServiceError> // 연락처에서 친구 데이터베이스로 넣기
 }
@@ -58,6 +59,10 @@ class UserService: UserServiceType {
         try await dbRepository.updateUser(userId: userId, key: "description", value: description)
     }
     
+    func updateProfileURL(userId: String, urlString: String) async throws {
+        try await dbRepository.updateUser(userId: userId, key: "profileURL", value: urlString)
+    }
+    
     func addUserAfterContact(users: [User]) -> AnyPublisher<Void, ServiceError> {
         dbRepository.addUserAfterContact(users: users.map { $0.toObject()} )
             .mapError { .error($0) }
@@ -81,6 +86,10 @@ class StubUserService: UserServiceType {
     }
     
     func updateDescription(userId: String, description: String) async throws {
+        
+    }
+    
+    func updateProfileURL(userId: String, urlString: String) async throws {
         
     }
     

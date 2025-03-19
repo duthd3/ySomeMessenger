@@ -15,21 +15,24 @@ class HomeViewModel: ObservableObject {
         case presentMyProfileView
         case presentOtherProfileView(String)
         case requestContacts
+        case goToChat(User)
     }
     
     @Published var myUser: User?
     @Published var users: [User] = []
     @Published var phase: Phase = .notRequested
     @Published var modalDestination: HomeModalDestination?
+    @Published var otherUser: User?
     
     var userId: String
     
     private var container: DIContainer
-    
+    private var navigationRouter: NavigationRouter
     private var subscriptions = Set<AnyCancellable>()
     
-    init(container: DIContainer, userId: String) {
+    init(container: DIContainer, navigationRouter: NavigationRouter, userId: String) {
         self.container = container
+        self.navigationRouter = navigationRouter
         self.userId = userId
     }
     
@@ -82,6 +85,16 @@ class HomeViewModel: ObservableObject {
                     self?.phase = .success
                     self?.users = users
                 }.store(in: &subscriptions)
+        case let .goToChat(otherUser):
+            // ChatRooms/myUserId/otherUserId 에 채팅방 저장하기
+            container.services.chatRoomService.createChatRoomIfNeeded(myUserId: userId, otherUserId: otherUser.id, otherUserName: otherUser.name)
+                .sink { completion in
+                    
+                } receiveValue: { chatRoom in
+                    // TODO: 채팅뷰로 navigation
+                    self.navigationRouter.push(to: .chat)
+                }.store(in: &subscriptions)
+            return
         }
     }
 }

@@ -9,18 +9,24 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var container: DIContainer
+    @EnvironmentObject var navigationRouter: NavigationRouter
     @StateObject var viewModel: HomeViewModel
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationRouter.destinations) {
            contentView
                 .fullScreenCover(item: $viewModel.modalDestination) {
                     switch $0 {
                     case .myProfile:
                         MyProfileView(viewModel: .init(container: container, userId: viewModel.userId))
                     case let .otherProfile(userId):
-                        OtherProfileView()
+                        OtherProfileView(viewModel: .init(container: container, userId: userId)) { otherUserInfo in
+                            viewModel.send(action: .goToChat(otherUserInfo))
+                        }
                     }
+                }
+                .navigationDestination(for: NavigationDestination.self) {
+                    NavigationRoutingView(destination: $0)
                 }
         }
     }
@@ -58,8 +64,10 @@ struct HomeView: View {
         ScrollView {
             profileView
                 .padding(.bottom, 30)
-            searchButtonView
-                .padding(.bottom, 24)
+            NavigationLink(value: NavigationDestination.search) {
+                SearchButton()
+            }
+            .padding(.bottom, 24)
             HStack {
                 Text("친구")
                     .font(.system(size: 14))
@@ -123,21 +131,9 @@ struct HomeView: View {
     }
     
     var searchButtonView: some View {
-        ZStack {
-            Rectangle()
-                .foregroundStyle(.clear)
-                .frame(height: 36)
-                .background(Color.greyCool)
-                .cornerRadius(5)
-            HStack {
-                Text("검색")
-                    .font(.system(size: 12))
-                    .foregroundStyle(.greyLightVer2)
-                Spacer()
-            }
-            .padding(.leading, 22)
+        NavigationLink(value: NavigationDestination.search) {
+            SearchButton()
         }
-        .padding(.horizontal, 30)
     }
     
     var emptyView: some View {
@@ -169,6 +165,8 @@ struct HomeView: View {
     }
 }
 
-#Preview {
-    HomeView(viewModel: .init(container: .init(services: StubService()), userId: "user1_id"))
-}
+//#Preview {
+//    let navigationRouter: NavigationRouter = .init()
+//    HomeView(viewModel: .init(container: .init(services: StubService()), navigationRouter: navigationRouter, userId: "user1_id"))
+//        .environmentObject(NavigationRouter())
+//}

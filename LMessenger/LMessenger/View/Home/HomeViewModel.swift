@@ -90,9 +90,9 @@ class HomeViewModel: ObservableObject {
             container.services.chatRoomService.createChatRoomIfNeeded(myUserId: userId, otherUserId: otherUser.id, otherUserName: otherUser.name)
                 .sink { completion in
                     
-                } receiveValue: { chatRoom in
-                    // TODO: 채팅뷰로 navigation
-                    self.navigationRouter.push(to: .chat)
+                } receiveValue: { [weak self] chatRoom in
+                    guard let `self` = self else { return }
+                    self.navigationRouter.push(to: .chat(chatRoomId: chatRoom.chatRoomId, myUserId: self.userId, otherUserId: otherUser.id))
                 }.store(in: &subscriptions)
             return
         }

@@ -59,6 +59,7 @@ struct OtherProfileView: View {
                 Button {
                     if menu == .chat, let userInfo = viewModel.userInfo {
                         dismiss()
+                        print(userInfo)
                         goToChat(userInfo)
                     }
                 } label: {

@@ -83,7 +83,7 @@ struct HomeView: View {
             } else {
                 LazyVStack {
                     // 친구가 있을 때(무한히 늘어 나야 함)
-                    ForEach(viewModel.users, id: \.id) { user in
+                    ForEach(viewModel.users.sorted { $0.name < $1.name}, id: \.id) { user in
                         Button(action: {
                             viewModel.send(action: .presentOtherProfileView(user.id))
                         }, label: {

@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AuthenticatedView: View {
     @StateObject var authViewModel: AuthenticationViewModel
     @StateObject var navigationRouter: NavigationRouter
-    
+    @StateObject var searchDataController: SearchDataController
     var body: some View {
         
         VStack {
@@ -20,6 +21,7 @@ struct AuthenticatedView: View {
                     .environmentObject(authViewModel)
             case .authenticated: // 인증 상태일 경우
                 MainTabView()
+                    .environment(\.managedObjectContext, searchDataController.persistentContainer.viewContext) // CoreData를 View에서 사용하기 위해 environment 지정
                     .environmentObject(authViewModel)
                     .environmentObject(navigationRouter)
                     .onAppear {
@@ -37,5 +39,5 @@ struct AuthenticatedView: View {
 }
 
 #Preview {
-    AuthenticatedView(authViewModel: .init(container: .init(services: StubService())), navigationRouter: .init())
+    AuthenticatedView(authViewModel: .init(container: .init(services: StubService())), navigationRouter: .init(), searchDataController: .init()                  )
 }

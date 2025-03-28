@@ -13,7 +13,7 @@ struct LMessengerApp: App {
     @StateObject var container: DIContainer = .init(services: Services())
     var body: some Scene {
         WindowGroup {
-            AuthenticatedView(authViewModel: .init(container: container), navigationRouter: .init())
+            AuthenticatedView(authViewModel: .init(container: container), navigationRouter: .init(), searchDataController: .init())
                 .environmentObject(container)
         }
     }

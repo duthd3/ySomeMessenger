@@ -11,14 +11,16 @@ import SwiftUI
 struct SearchBar: UIViewRepresentable {
     @Binding var text: String
     @Binding var shouldBecomeFirstResponder: Bool
+    var onClickedSearchButton: (() -> Void)?
     
-    init(text: Binding<String>, shouldBecomeFirstResponder: Binding<Bool>) {
+    init(text: Binding<String>, shouldBecomeFirstResponder: Binding<Bool>, onClickedSearchButton: (() -> Void)?) {
         self._text = text
         self._shouldBecomeFirstResponder = shouldBecomeFirstResponder
+        self.onClickedSearchButton = onClickedSearchButton
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(text: $text, shouldBecomeFirstResponder: $shouldBecomeFirstResponder)
+        Coordinator(text: $text, shouldBecomeFirstResponder: $shouldBecomeFirstResponder, onClickedSearchButton: onClickedSearchButton)
     }
     
     func makeUIView(context: Context) -> UISearchBar {
@@ -55,10 +57,13 @@ extension SearchBar {
     class Coordinator: NSObject, UISearchBarDelegate {
         @Binding var text: String
         @Binding var shouldBecomeFirstResponder: Bool
+        var onClickedSearchButton: (() -> Void)?
         
-        init(text: Binding<String>, shouldBecomeFirstResponder: Binding<Bool>) {
+        init(text: Binding<String>, shouldBecomeFirstResponder: Binding<Bool>
+             , onClickedSearchButton: (() -> Void)?) {
             self._text = text
             self._shouldBecomeFirstResponder = shouldBecomeFirstResponder
+            self.onClickedSearchButton = onClickedSearchButton
         }
         
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -75,6 +80,10 @@ extension SearchBar {
         
         func setSearchText(_ searchBar: UISearchBar, text: String) {
             searchBar.text = text
+        }
+        
+        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            onClickedSearchButton?()
         }
     }
 }

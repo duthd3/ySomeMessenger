@@ -8,27 +8,31 @@
 import SwiftUI
 
 struct SearchView: View {
+    @Environment(\.managedObjectContext) var objectContext // 컨텍스트 가져오기(데이터 저장, 삭제, 업데이트 위해서)
     @EnvironmentObject var navigationRouter: NavigationRouter
     @StateObject var viewModel: SearchViewModel
     var body: some View {
         VStack {
             topView
-            
-            List {
-                ForEach(viewModel.searchResults) { result in
-                    HStack(spacing: 8) {
-                        URLImageView(urlString: result.profileURL)
-                            .frame(width: 26, height: 26)
-                            .clipShape(Circle())
-                        Text(result.name)
-                            .font(.system(size: 14, weight: .bold))
-                            .foregroundStyle(.bkText)
+            if viewModel.searchResults.isEmpty {
+                RecentSearchView()
+            } else {
+                List {
+                    ForEach(viewModel.searchResults) { result in
+                        HStack(spacing: 8) {
+                            URLImageView(urlString: result.profileURL)
+                                .frame(width: 26, height: 26)
+                                .clipShape(Circle())
+                            Text(result.name)
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundStyle(.bkText)
+                        }
+                        .listRowInsets(.init())
+                        .listRowSeparator(.hidden)
+                        .padding(.horizontal, 30)
                     }
-                    .listRowInsets(.init())
-                    .listRowSeparator(.hidden)
-                    .padding(.horizontal, 30)
-                }
-            }.listStyle(.plain)
+                }.listStyle(.plain)
+            }
         }
         .toolbar(.hidden, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
@@ -41,7 +45,10 @@ struct SearchView: View {
             }, label: {
                 Image("back_search")
             })
-            SearchBar(text: $viewModel.searchText, shouldBecomeFirstResponder: $viewModel.shouldBecomeFirstResponder)
+            SearchBar(text: $viewModel.searchText, shouldBecomeFirstResponder: $viewModel.shouldBecomeFirstResponder) {
+                // data 저장
+                setSearchResultWithContext()
+            }
             
             Button {
                 viewModel.send(action: .clearSearchText)
@@ -50,6 +57,15 @@ struct SearchView: View {
             }
         }
         .padding(.horizontal, 20)
+    }
+    
+    func setSearchResultWithContext() { // 최근 검색어 data 저장
+        let result = SearchResult(context: objectContext)
+        result.id = UUID().uuidString
+        result.name = viewModel.searchText
+        result.date = Date()
+        
+        try? objectContext.save()
     }
 }
 

@@ -44,6 +44,9 @@
 		BF865B422D4E6B120050F72B /* RandomNonceString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF865B402D4E6B120050F72B /* RandomNonceString.swift */; };
 		BF891D1B2D95891900ECDAC1 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF891D1A2D95891900ECDAC1 /* SearchViewModel.swift */; };
 		BF891D1D2D958AB500ECDAC1 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF891D1C2D958AB500ECDAC1 /* SearchBar.swift */; };
+		BF891D202D96F87100ECDAC1 /* Search.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF891D1E2D96F87100ECDAC1 /* Search.xcdatamodeld */; };
+		BF891D232D96F8BE00ECDAC1 /* SearchDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF891D222D96F8BE00ECDAC1 /* SearchDataController.swift */; };
+		BF891D252D96FAD700ECDAC1 /* RecentSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF891D242D96FAD700ECDAC1 /* RecentSearchView.swift */; };
 		BF8AB6622D86973000D64367 /* URLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8AB6612D86973000D64367 /* URLImageView.swift */; };
 		BF8AB6652D86974F00D64367 /* URLImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8AB6642D86974F00D64367 /* URLImageViewModel.swift */; };
 		BF8AB6692D86A21A00D64367 /* OtherProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8AB6682D86A21A00D64367 /* OtherProfileViewModel.swift */; };
@@ -132,6 +135,9 @@
 		BF865B402D4E6B120050F72B /* RandomNonceString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNonceString.swift; sourceTree = "<group>"; };
 		BF891D1A2D95891900ECDAC1 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		BF891D1C2D958AB500ECDAC1 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		BF891D1F2D96F87100ECDAC1 /* Search.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Search.xcdatamodel; sourceTree = "<group>"; };
+		BF891D222D96F8BE00ECDAC1 /* SearchDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataController.swift; sourceTree = "<group>"; };
+		BF891D242D96FAD700ECDAC1 /* RecentSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchView.swift; sourceTree = "<group>"; };
 		BF8AB6612D86973000D64367 /* URLImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageView.swift; sourceTree = "<group>"; };
 		BF8AB6642D86974F00D64367 /* URLImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageViewModel.swift; sourceTree = "<group>"; };
 		BF8AB6682D86A21A00D64367 /* OtherProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfileViewModel.swift; sourceTree = "<group>"; };
@@ -201,6 +207,7 @@
 		BF1F0E6B2D2527D2000C8028 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				BF891D212D96F8B500ECDAC1 /* Search */,
 				BF8AB6742D86B2AD00D64367 /* Navigation */,
 				BF43D4862D74649B00A88000 /* View */,
 				BF1F0E6C2D2527DB000C8028 /* DIContainer.swift */,
@@ -312,6 +319,14 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		BF891D212D96F8B500ECDAC1 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				BF891D222D96F8BE00ECDAC1 /* SearchDataController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		BF8AB6632D86974200D64367 /* URLImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +383,7 @@
 				BF8AB67D2D86D9FA00D64367 /* SearchView.swift */,
 				BF891D1A2D95891900ECDAC1 /* SearchViewModel.swift */,
 				BF891D1C2D958AB500ECDAC1 /* SearchBar.swift */,
+				BF891D242D96FAD700ECDAC1 /* RecentSearchView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -530,6 +546,7 @@
 				BFD62FA42D20253600434A0C /* Assets.xcassets */,
 				BFD62FB52D20320200434A0C /* LaunchScreen.storyboard */,
 				BF1F0E692D2526E5000C8028 /* Colors.xcassets */,
+				BF891D1E2D96F87100ECDAC1 /* Search.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -653,6 +670,7 @@
 				BF43D48E2D74673F00A88000 /* HomeModalDestination.swift in Sources */,
 				BF1F0E702D252835000C8028 /* Services.swift in Sources */,
 				BF1F0E6D2D2527DB000C8028 /* DIContainer.swift in Sources */,
+				BF891D202D96F87100ECDAC1 /* Search.xcdatamodeld in Sources */,
 				BF8AB6692D86A21A00D64367 /* OtherProfileViewModel.swift in Sources */,
 				BF253E672D8B07A800D4BF06 /* ChatItemView.swift in Sources */,
 				BFCB7F132D620CCF00D021E0 /* UserService.swift in Sources */,
@@ -664,6 +682,7 @@
 				BF8AB6782D86D8A800D64367 /* NavigationRouter.swift in Sources */,
 				BF1F0E7B2D2531B2000C8028 /* AppDelegate.swift in Sources */,
 				BFD62FB32D202E3F00434A0C /* Color+Extension.swift in Sources */,
+				BF891D252D96FAD700ECDAC1 /* RecentSearchView.swift in Sources */,
 				BF8F26682D58D19800C35AEF /* ChatListView.swift in Sources */,
 				BFA0A7D02D7DBD75001BA524 /* PhotoImage.swift in Sources */,
 				BF8F26642D58CCB000C35AEF /* MainTabViewType.swift in Sources */,
@@ -682,6 +701,7 @@
 				BF865B412D4E6B120050F72B /* SHA256.swift in Sources */,
 				BFAE74DD2D9012310001AB15 /* ChatDBRepository.swift in Sources */,
 				BF8AB66F2D86A96200D64367 /* ChatRoomObject.swift in Sources */,
+				BF891D232D96F8BE00ECDAC1 /* SearchDataController.swift in Sources */,
 				BF253E692D8B07C200D4BF06 /* ChatItemDirection.swift in Sources */,
 				BF1F0E872D253824000C8028 /* LoginView.swift in Sources */,
 				BF865B422D4E6B120050F72B /* RandomNonceString.swift in Sources */,
@@ -966,6 +986,20 @@
 			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		BF891D1E2D96F87100ECDAC1 /* Search.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BF891D1F2D96F87100ECDAC1 /* Search.xcdatamodel */,
+			);
+			currentVersion = BF891D1F2D96F87100ECDAC1 /* Search.xcdatamodel */;
+			name = Search.xcdatamodeld;
+			path = /Users/jun/Desktop/ySomeMessenger/ySomeMessenger/LMessenger/LMessenger/Resources/Search.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BFD62F952D20253500434A0C /* Project object */;
 }

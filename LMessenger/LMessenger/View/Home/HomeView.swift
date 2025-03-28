@@ -64,7 +64,7 @@ struct HomeView: View {
         ScrollView {
             profileView
                 .padding(.bottom, 30)
-            NavigationLink(value: NavigationDestination.search) {
+            NavigationLink(value: NavigationDestination.search(userId: viewModel.userId)) {
                 SearchButton()
             }
             .padding(.bottom, 24)
@@ -131,7 +131,7 @@ struct HomeView: View {
     }
     
     var searchButtonView: some View {
-        NavigationLink(value: NavigationDestination.search) {
+        NavigationLink(value: NavigationDestination.search(userId: viewModel.userId)) {
             SearchButton()
         }
     }

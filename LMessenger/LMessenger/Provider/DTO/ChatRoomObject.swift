@@ -11,11 +11,11 @@ struct ChatRoomObject: Codable {
     var chatRoomId: String
     var lastMessage: String?
     var otherUserName: String
-    var otherUserID: String
+    var otherUserId: String
 }
 
 extension ChatRoomObject {
     func toModel() -> ChatRoom {
-        .init(chatRoomId: chatRoomId, lastMessage: lastMessage, otherUserName: otherUserName, otherUserId: otherUserID)
+        .init(chatRoomId: chatRoomId, lastMessage: lastMessage, otherUserName: otherUserName, otherUserId: otherUserId)
     }
 }

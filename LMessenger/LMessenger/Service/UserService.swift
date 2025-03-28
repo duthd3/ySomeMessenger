@@ -12,10 +12,12 @@ protocol UserServiceType {
     func addUser(_ user: User) -> AnyPublisher<User, ServiceError>
     func getUser(userId: String) -> AnyPublisher<User, ServiceError>
     func getUser(userId: String) async throws -> User
+    func updateFCMToken(userId: String, fcmToken: String) -> AnyPublisher<Void, ServiceError>
     func updateDescription(userId: String, description: String) async throws
     func updateProfileURL(userId: String, urlString: String) async throws
     func loadUsers(id: String) -> AnyPublisher<[User], ServiceError> // 유저 정보 가져오기 (친구)
     func addUserAfterContact(users: [User]) -> AnyPublisher<Void, ServiceError> // 연락처에서 친구 데이터베이스로 넣기
+    func filterUsers(with queryString: String, userId: String) -> AnyPublisher<[User], ServiceError>// 검색 필터링
 }
 
 class UserService: UserServiceType {
@@ -69,6 +71,22 @@ class UserService: UserServiceType {
             .eraseToAnyPublisher()
             
     }
+    
+    func updateFCMToken(userId: String, fcmToken: String) -> AnyPublisher<Void, ServiceError> {
+        dbRepository.updateUser(id: userId, key: "fcmToken", value: fcmToken)
+            .mapError { ServiceError.error($0) }
+            .eraseToAnyPublisher()
+    }
+    
+    func filterUsers(with queryString: String, userId: String) -> AnyPublisher<[User], ServiceError> {
+        dbRepository.filterUsers(with: queryString)
+            .map { $0
+                .map { $0.toModel() }
+                    .filter { $0.id != userId }
+            }
+            .mapError { .error($0) }
+            .eraseToAnyPublisher()
+    }
 
 }
 
@@ -99,5 +117,13 @@ class StubUserService: UserServiceType {
     
     func addUserAfterContact(users: [User]) -> AnyPublisher<Void, ServiceError> {
         Empty().eraseToAnyPublisher()
+    }
+    
+    func updateFCMToken(userId: String, fcmToken: String) -> AnyPublisher<Void, ServiceError> {
+        Empty().eraseToAnyPublisher()
+    }
+    
+    func filterUsers(with queryString: String, userId: String) -> AnyPublisher<[User], ServiceError> {
+        Just([.stub1, .stub2]).setFailureType(to: ServiceError.self).eraseToAnyPublisher()
     }
 }

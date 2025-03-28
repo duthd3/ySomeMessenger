@@ -53,7 +53,7 @@ class ChatRoomDBRepository: ChatRoomDBRepositoryType {
             .compactMap { try? JSONSerialization.jsonObject(with: $0, options: .fragmentsAllowed)}
             .flatMap { value in
                 Future<Void, Error> { [weak self] promise in
-                    self?.db.child(DBKey.ChatRooms).child(myUserId).child(object.otherUserID).setValue(value) { error, _ in
+                    self?.db.child(DBKey.ChatRooms).child(myUserId).child(object.otherUserId).setValue(value) { error, _ in
                         if let error {
                             promise(.failure(error))
                         } else {

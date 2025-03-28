@@ -17,7 +17,7 @@ struct ChatRoom: Hashable {
 
 extension ChatRoom {
     func toObject() -> ChatRoomObject {
-        .init(chatRoomId: chatRoomId, lastMessage: lastMessage, otherUserName: otherUserName, otherUserID: otherUserId)
+        .init(chatRoomId: chatRoomId, lastMessage: lastMessage, otherUserName: otherUserName, otherUserId: otherUserId)
     }
     
     static var stub1: ChatRoom {

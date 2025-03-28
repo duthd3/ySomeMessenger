@@ -32,6 +32,7 @@ class ChatListViewModel: ObservableObject {
                     print(completion)
                 } receiveValue: { [weak self] chatRooms in
                     self?.chatRooms = chatRooms
+                    print(chatRooms)
                 }.store(in: &subscriptions)
             return
         }

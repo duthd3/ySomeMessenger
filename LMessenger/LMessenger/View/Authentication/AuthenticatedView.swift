@@ -12,6 +12,7 @@ struct AuthenticatedView: View {
     @StateObject var authViewModel: AuthenticationViewModel
     @StateObject var navigationRouter: NavigationRouter
     @StateObject var searchDataController: SearchDataController
+    @StateObject var appearanceController: AppearanceController
     var body: some View {
         
         VStack {
@@ -24,6 +25,7 @@ struct AuthenticatedView: View {
                     .environment(\.managedObjectContext, searchDataController.persistentContainer.viewContext) // CoreData를 View에서 사용하기 위해 environment 지정
                     .environmentObject(authViewModel)
                     .environmentObject(navigationRouter)
+                    .environmentObject(appearanceController)
                     .onAppear {
                         authViewModel.send(action: .requestPushNotification)
                     }
@@ -31,13 +33,12 @@ struct AuthenticatedView: View {
         }
         .onAppear {
             authViewModel.send(action: .checkAuthenticationState)
-
-            
         }
+        .preferredColorScheme(appearanceController.appearance.colorScheme)
         
     }
 }
 
 #Preview {
-    AuthenticatedView(authViewModel: .init(container: .init(services: StubService())), navigationRouter: .init(), searchDataController: .init()                  )
+    AuthenticatedView(authViewModel: .init(container: .init(services: StubService())), navigationRouter: .init(), searchDataController: .init(), appearanceController: .init(0))
 }
